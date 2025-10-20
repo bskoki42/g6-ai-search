@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title><?= title ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      window.APP_ACCESS_KEY = '<?= appKey ?>';
+      const APP_CONFIG = {
+        csrfKey: '<?= appKey ? 'required' : 'optional' ?>'
+      };
+    </script>
+    <style><?!= include('public/style'); ?></style>
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>振り返りポータル</h1>
+      <p class="app-subtitle">教科ごとの前回振り返りを確認してから今回の学びを記録しましょう。</p>
+    </header>
+
+    <main class="container" id="app">
+      <section class="card">
+        <h2>ログイン情報</h2>
+        <dl class="profile">
+          <div>
+            <dt>メールアドレス</dt>
+            <dd id="profile-email">読み込み中...</dd>
+          </div>
+          <div>
+            <dt>表示名（カタカナ）</dt>
+            <dd id="profile-name">読み込み中...</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <h2>教科と前回振り返り</h2>
+        <label for="subject-select">教科を選択：</label>
+        <select id="subject-select"></select>
+        <div id="previous-container" class="previous-box">
+          <h3>前回の振り返り</h3>
+          <p id="previous-status" class="placeholder">教科を選択すると前回の記録が表示されます。</p>
+          <div id="previous-detail" class="hidden">
+            <p><strong>日時:</strong> <span id="previous-timestamp"></span></p>
+            <p><strong>状態:</strong> <span id="previous-state"></span></p>
+            <p><strong>振り返り本文:</strong></p>
+            <p id="previous-text" class="reflection-text"></p>
+            <p><strong>評価:</strong> <span id="previous-eval"></span></p>
+            <p><strong>先生コメント:</strong></p>
+            <p id="previous-comment" class="reflection-text"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>今回の振り返りを記入</h2>
+        <label for="reflection-input">本文（1〜2000文字）</label>
+        <textarea id="reflection-input" rows="8" maxlength="2000" placeholder="例：今日は〇〇を学び、△△が難しかったです..."></textarea>
+        <p class="char-counter">文字数: <span id="char-count">0</span>/2000</p>
+        <button id="submit-button" class="primary">送信する</button>
+        <p id="submit-status" class="status-message"></p>
+      </section>
+
+      <section class="card">
+        <h2>テスト/検証ショートカット</h2>
+        <p>初期導入時はダミーデータを生成して動作を確認できます（教員のみ）。</p>
+        <button id="bootstrap-button" class="secondary">ダミーデータ生成</button>
+        <p id="bootstrap-status" class="status-message"></p>
+      </section>
+    </main>
+
+    <template id="toast-template">
+      <div class="toast" role="status"></div>
+    </template>
+
+    <script><?!= include('public/app'); ?></script>
+  </body>
+</html>

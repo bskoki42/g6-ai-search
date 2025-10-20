@@ -1,0 +1,235 @@
+(() => {
+  'use strict';
+
+  const SUBJECTS = ['国', '算', '社', '理', '音', '図工', '図書', '未来', '家', '道', '外', '体', 'ク委', '特活'];
+  const API_HEADERS = () => {
+    const headers = { 'Content-Type': 'application/json' };
+    if (APP_CONFIG && APP_CONFIG.csrfKey === 'required' && window.APP_ACCESS_KEY) {
+      headers['X-App-Key'] = window.APP_ACCESS_KEY;
+    }
+    return headers;
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initStudentView();
+    initTeacherView();
+  });
+
+  function initStudentView() {
+    const subjectSelect = document.getElementById('subject-select');
+    if (!subjectSelect) {
+      return;
+    }
+    SUBJECTS.forEach(subject => {
+      const option = document.createElement('option');
+      option.value = subject;
+      option.textContent = subject;
+      subjectSelect.appendChild(option);
+    });
+
+    subjectSelect.addEventListener('change', () => {
+      loadPrevious(subjectSelect.value);
+    });
+
+    document.getElementById('reflection-input').addEventListener('input', updateCharCount);
+    document.getElementById('submit-button').addEventListener('click', submitReflection);
+    document.getElementById('bootstrap-button').addEventListener('click', bootstrapData);
+
+    updateCharCount();
+    loadProfile().then(() => {
+      if (subjectSelect.value) {
+        loadPrevious(subjectSelect.value);
+      }
+    });
+  }
+
+  function initTeacherView() {
+    const subjectSelect = document.getElementById('teacher-subject');
+    if (!subjectSelect) {
+      return;
+    }
+    const tableBody = document.querySelector('#teacher-table tbody');
+    SUBJECTS.forEach(subject => {
+      const option = document.createElement('option');
+      option.value = subject;
+      option.textContent = subject;
+      subjectSelect.appendChild(option);
+    });
+    document.getElementById('teacher-load').addEventListener('click', () => {
+      const subject = subjectSelect.value;
+      const date = document.getElementById('teacher-date').value;
+      const query = document.getElementById('teacher-query').value.trim();
+      fetchJson(`/api/approvals?subject=${encodeURIComponent(subject)}&date=${encodeURIComponent(date)}`)
+        .then(items => {
+          const filtered = query ? items.filter(item => [item.studentName, item.studentEmail, item.reflection].some(text => (text || '').includes(query))) : items;
+          renderTeacherTable(tableBody, filtered);
+          document.getElementById('teacher-status').textContent = `承認待ち: ${filtered.length}件`;
+        })
+        .catch(err => {
+          document.getElementById('teacher-status').textContent = `読み込み失敗: ${err.message}`;
+        });
+    });
+  }
+
+  function loadProfile() {
+    return fetchJson('/api/me')
+      .then(profile => {
+        document.getElementById('profile-email').textContent = profile.email || '未取得';
+        document.getElementById('profile-name').textContent = profile.displayName || '名簿を確認してください';
+      })
+      .catch(err => {
+        document.getElementById('profile-email').textContent = '取得失敗';
+        document.getElementById('profile-name').textContent = err.message;
+      });
+  }
+
+  function loadPrevious(subject) {
+    if (!subject) {
+      return;
+    }
+    const previousStatus = document.getElementById('previous-status');
+    const previousDetail = document.getElementById('previous-detail');
+    previousStatus.textContent = '読み込み中...';
+    previousDetail.classList.add('hidden');
+    fetchJson(`/api/previous?subject=${encodeURIComponent(subject)}`)
+      .then(result => {
+        if (!result.hasPrevious) {
+          previousStatus.textContent = '前回の記録はありません。';
+          return;
+        }
+        previousStatus.textContent = '';
+        previousDetail.classList.remove('hidden');
+        document.getElementById('previous-timestamp').textContent = formatDate(result.timestamp);
+        document.getElementById('previous-state').textContent = result.status || 'submitted';
+        document.getElementById('previous-text').textContent = result.reflection || '';
+        document.getElementById('previous-eval').textContent = result.evaluation || '（承認待ち）';
+        document.getElementById('previous-comment').textContent = result.teacherComment || '（コメントはまだありません）';
+      })
+      .catch(err => {
+        previousStatus.textContent = `取得失敗: ${err.message}`;
+      });
+  }
+
+  function updateCharCount() {
+    const textarea = document.getElementById('reflection-input');
+    if (!textarea) {
+      return;
+    }
+    document.getElementById('char-count').textContent = textarea.value.length;
+  }
+
+  function submitReflection() {
+    const subject = document.getElementById('subject-select').value;
+    const reflection = document.getElementById('reflection-input').value.trim();
+    const statusField = document.getElementById('submit-status');
+    statusField.textContent = '送信中...';
+    postJson('/api/submit', { subject, reflection })
+      .then(response => {
+        statusField.textContent = '送信が完了しました。';
+        showToast('振り返りを送信しました。');
+        loadPrevious(subject);
+      })
+      .catch(err => {
+        statusField.textContent = `送信失敗: ${err.message}`;
+      });
+  }
+
+  function bootstrapData() {
+    const statusField = document.getElementById('bootstrap-status');
+    statusField.textContent = '実行中...';
+    postJson('/api/bootstrap', {})
+      .then(() => {
+        statusField.textContent = 'ダミーデータを追加しました。教科を再読み込みしてください。';
+        showToast('ダミーデータを登録しました');
+      })
+      .catch(err => {
+        statusField.textContent = `失敗: ${err.message}`;
+      });
+  }
+
+  function renderTeacherTable(body, items) {
+    body.innerHTML = '';
+    if (!items.length) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 8;
+      cell.textContent = '該当するデータがありません。';
+      row.appendChild(cell);
+      body.appendChild(row);
+      return;
+    }
+    items.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${escapeHtml(formatDate(item.timestamp))}</td>
+        <td>${escapeHtml(item.studentEmail || '')}</td>
+        <td>${escapeHtml(item.studentName || '')}</td>
+        <td>${escapeHtml(item.subject || '')}</td>
+        <td>${escapeHtml(item.reflection || '').replace(/\n/g, '<br>')}</td>
+        <td>${escapeHtml(item.status || '')}</td>
+        <td>${escapeHtml(item.eval || '')}</td>
+        <td>${escapeHtml(item.teacherComment || '')}</td>
+      `;
+      body.appendChild(row);
+    });
+  }
+
+  function fetchJson(url) {
+    return fetch(url, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    }).then(handleJsonResponse);
+  }
+
+  function postJson(url, body) {
+    return fetch(url, {
+      method: 'POST',
+      headers: API_HEADERS(),
+      body: JSON.stringify(body)
+    }).then(handleJsonResponse);
+  }
+
+  function handleJsonResponse(response) {
+    if (!response.ok) {
+      return response.text().then(text => {
+        throw new Error(text || response.statusText);
+      });
+    }
+    return response.json();
+  }
+
+  function formatDate(value) {
+    if (!value) {
+      return '';
+    }
+    try {
+      return new Date(value).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    } catch (err) {
+      return value;
+    }
+  }
+
+  function escapeHtml(text) {
+    return (text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function showToast(message) {
+    const template = document.getElementById('toast-template');
+    if (!template) {
+      return;
+    }
+    const toast = template.content.firstElementChild.cloneNode(true);
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+})();
