@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title><?= title ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style><?!= include('public/style'); ?></style>
+    <script>
+      window.APP_ACCESS_KEY = '<?= appKey ?>';
+      const APP_CONFIG = {
+        csrfKey: '<?= appKey ? 'required' : 'optional' ?>'
+      };
+    </script>
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>教員ビュー</h1>
+      <p class="app-subtitle">教科・期間で絞り込み、承認シートの状況を確認します。</p>
+    </header>
+
+    <main class="container" id="teacher-app">
+      <section class="card">
+        <h2>検索条件</h2>
+        <div class="field-grid">
+          <label>
+            教科
+            <select id="teacher-subject"></select>
+          </label>
+          <label>
+            日付（YYYY-MM-DD）
+            <input type="date" id="teacher-date" />
+          </label>
+          <label>
+            キーワード
+            <input type="text" id="teacher-query" placeholder="氏名や本文の一部" />
+          </label>
+        </div>
+        <button id="teacher-load" class="primary">一覧を読み込む</button>
+      </section>
+
+      <section class="card">
+        <h2>承認待ち一覧</h2>
+        <p id="teacher-status" class="status-message"></p>
+        <table class="data-table" id="teacher-table">
+          <thead>
+            <tr>
+              <th>日時</th>
+              <th>メール</th>
+              <th>氏名</th>
+              <th>教科</th>
+              <th>本文</th>
+              <th>状態</th>
+              <th>評価</th>
+              <th>コメント</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script><?!= include('public/app'); ?></script>
+  </body>
+</html>
