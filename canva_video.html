@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canva動画プレイヤー</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+        background: radial-gradient(circle at top, #1f2a44, #0d1117 45%);
+        color: #f7f8fb;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .card {
+        width: min(100%, 960px);
+        background: rgba(19, 26, 40, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+        font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+        margin: 0 0 12px;
+      }
+      p {
+        margin: 0 0 16px;
+        opacity: 0.9;
+      }
+      .frame-wrap {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+      }
+      iframe {
+        border: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      a.button {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+      }
+      .primary {
+        background: #7d5cff;
+      }
+      .secondary {
+        background: #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Canva動画（HTML埋め込み）</h1>
+      <p>
+        指定されたCanvaリンクの動画を、このHTMLページ内でそのまま再生できるようにしています。
+      </p>
+      <div class="frame-wrap">
+        <iframe
+          src="https://canva.link/p9ykdxr9khudxcs"
+          title="Canva動画"
+          loading="lazy"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="https://canva.link/p9ykdxr9khudxcs" target="_blank" rel="noopener noreferrer">新しいタブで開く</a>
+        <a class="button secondary" href="./canva_video.html">ページを再読み込み</a>
+      </div>
+    </main>
+  </body>
+</html>
