@@ -1,6 +1,244 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#eef9f5"><title>100マスチャレンジ</title><style>
-:root{--g:#278565;--g2:#6bc2a3;--b:#4e86c8;--ink:#18342c;--mut:#6d7e79;--line:#d5e7e0;--cell:min(7.15vw,52px)}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Noto Sans JP","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 8%,#dff4ea 0,transparent 28%),radial-gradient(circle at 90% 12%,#e2efff 0,transparent 25%),linear-gradient(145deg,#f8fcfa,#f1f7ff)}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#78aa9b28 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(#0008,transparent 75%)}main{width:min(980px,100%);margin:auto;padding:17px 13px 28px}.hero{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:11px}.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#ffffffb8;color:var(--g);font-size:11px;font-weight:900;letter-spacing:.08em;box-shadow:0 8px 24px #27554710}h1{font-size:clamp(27px,4vw,42px);margin:6px 0 2px;line-height:1;letter-spacing:-.05em}.sub{margin:0;color:var(--mut);font-size:12px;font-weight:700}.brain{width:55px;height:55px;display:grid;place-items:center;border-radius:17px;background:#fff;border:1px solid #fff;box-shadow:0 13px 35px #27554718;font-size:27px;transform:rotate(3deg)}.tools{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr;gap:7px;margin-bottom:8px}.box{min-height:61px;padding:8px 11px;border-radius:17px;background:#ffffffdc;border:1px solid #fff;box-shadow:0 9px 25px #27554710}.modes{display:flex;gap:5px;padding:7px}.mode{flex:1;border:0;border-radius:11px;background:transparent;color:var(--mut);font-weight:950;cursor:pointer}.mode.on{color:#fff;background:linear-gradient(135deg,var(--g),var(--g2));box-shadow:0 7px 16px #27856532}.lab{font-size:9px;letter-spacing:.1em;color:var(--mut);font-weight:900}.val{font-size:19px;font-weight:1000;margin-top:2px}.prog{display:flex;gap:9px;align-items:center;background:#ffffffbd;border:1px solid #fff;border-radius:15px;padding:9px 11px;margin-bottom:8px}.track{height:8px;flex:1;background:#e2eee9;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--g2),var(--b));transition:.2s;border-radius:99px}.pt{font-size:11px;font-weight:950;color:var(--mut);min-width:55px;text-align:right}.prog.pop{animation:pop .3s}@keyframes pop{50%{transform:scale(1.015)}}.card{background:#fffffff0;border:1px solid #fff;border-radius:23px;padding:11px;box-shadow:0 18px 48px #1f4e4018}.grid{display:grid;grid-template-columns:repeat(11,var(--cell));grid-auto-rows:var(--cell);gap:2px;width:fit-content;margin:auto}.c{display:grid;place-items:center;border-radius:7px;position:relative;min-width:0}.head{background:linear-gradient(145deg,#f1faf6,#e4f5ee);border:1px solid #d4eae1;color:#245c4c;font-weight:1000;font-size:clamp(13px,2vw,20px)}.corner{color:#fff;background:linear-gradient(145deg,#234e42,var(--g));font-weight:1000;font-size:clamp(17px,2.6vw,24px)}.ans{background:#fff;border:1px solid var(--line);transition:.12s}.ans.axis{background:#f0faf6}.head.axis{background:#d5f0e5;box-shadow:inset 0 0 0 2px #27856540}.ans.focus{z-index:2;border-color:var(--g2);box-shadow:0 0 0 3px #2785652c;transform:scale(1.04)}input{width:100%;height:100%;border:0;outline:0;background:transparent;text-align:center;padding:0;color:var(--ink);font:950 clamp(12px,1.9vw,18px)/1 inherit;caret-color:var(--g);border-radius:7px}input:disabled{-webkit-text-fill-color:var(--ink);opacity:1}.ok{background:#e0f7eb;border-color:#a4dfbf}.ng{background:#ffe5e0;border-color:#f1b4aa}.ng input{color:#9e3c32;text-decoration:line-through;transform:translateY(-5px);font-size:clamp(10px,1.55vw,15px)}.corr{display:none;position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:clamp(8px,1.2vw,11px);font-weight:1000;color:#a13b31;white-space:nowrap}.ng .corr{display:block}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.btn{border:0;border-radius:14px;padding:12px 10px;font-weight:1000;font-size:13px;cursor:pointer}.light{background:#e6f5ef;color:#285d4e}.strong{background:linear-gradient(135deg,var(--g),#43a585);color:#fff;box-shadow:0 8px 20px #2785652b}.hint{text-align:center;color:var(--mut);font-size:10px;font-weight:700;margin:7px 0 0}.toast{position:fixed;top:15px;left:50%;z-index:60;transform:translate(-50%,-15px);opacity:0;background:#204d41;color:#fff;border-radius:99px;padding:9px 15px;font-size:12px;font-weight:950;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;z-index:70;display:none;place-items:center;padding:18px;background:#173e345e;backdrop-filter:blur(8px)}.modal.show{display:grid}.result{width:min(92vw,420px);background:#fff;border-radius:27px;padding:21px;text-align:center;box-shadow:0 30px 80px #0d342b40;animation:in .35s cubic-bezier(.2,.9,.25,1.2)}@keyframes in{from{opacity:0;transform:scale(.92) translateY(12px)}}.icon{font-size:40px}.result h2{font-size:30px;margin:1px 0;font-weight:1000}.rsub{font-size:12px;color:var(--mut);font-weight:800}.score{font-size:55px;font-weight:1000;color:var(--g);letter-spacing:-.05em;margin:12px 0}.score small{font-size:20px;color:var(--mut);letter-spacing:0}.rstats{display:grid;grid-template-columns:1fr 1fr;gap:7px}.rs{background:#f2f8f5;border-radius:14px;padding:9px}.rs small{display:block;color:var(--mut);font-weight:800;font-size:10px}.rs b{font-size:18px}.note{font-size:11px;line-height:1.5;color:var(--mut);font-weight:750}.ra{display:grid;grid-template-columns:1fr 1fr;gap:7px}canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80}.spark{position:fixed;z-index:65;pointer-events:none;font-size:17px;animation:spark .6s ease-out forwards}@keyframes spark{to{transform:translate(var(--x),var(--y)) rotate(130deg);opacity:0}}
-@media(max-width:700px){:root{--cell:min(8.22vw,44px)}main{padding:11px 7px 20px}.brain{width:46px;height:46px;font-size:23px}.tools{grid-template-columns:1.25fr .78fr .78fr}.tools .box:last-child{display:none}.box{min-height:54px;border-radius:14px;padding:7px 8px}.modes{padding:5px}.mode{font-size:11px}.val{font-size:16px}.card{padding:7px 4px 8px;border-radius:19px}.grid{gap:1px}.actions{margin-top:7px}.btn{padding:11px 8px}.hint{font-size:9px}}@media(max-width:390px){:root{--cell:min(8.1vw,34px)}.brain{display:none}h1{font-size:25px}.tag{font-size:9px}}
-</style></head><body><canvas id="fx"></canvas><div class="toast" id="toast">スタート！</div><main><div class="hero"><div><span class="tag">✦ 100 QUESTIONS CHALLENGE</span><h1>100マスチャレンジ</h1><p class="sub">100問ぜんぶ埋めたら、自動で答え合わせ！</p></div><div class="brain">🧠</div></div><div class="tools"><div class="box modes"><button class="mode on" data-m="add">＋ たし算</button><button class="mode" data-m="mul">× かけ算</button></div><div class="box"><div class="lab">TIME</div><div class="val" id="time">0:00.0</div></div><div class="box"><div class="lab">のこり</div><div class="val"><span id="left">100</span>問</div></div><div class="box"><div class="lab">BEST</div><div class="val" id="best">—</div></div></div><div class="prog" id="prog"><div class="track"><div class="bar" id="bar"></div></div><div class="pt" id="pt">0 / 100</div></div><section class="card"><div class="grid" id="grid"></div><div class="actions"><button class="btn light" id="clear">↺ 答えだけ消す</button><button class="btn strong" id="new">✦ 新しい問題</button></div><p class="hint">最初の入力でタイマー開始。100マス入力すると自動採点。Enter・矢印キーでも移動できます。</p></section></main><div class="modal" id="modal"><div class="result"><div class="icon" id="icon">🏆</div><h2 id="rt">PERFECT!</h2><div class="rsub" id="rsub">100マス 全問正解</div><div class="score"><span id="score">100</span><small> / 100</small></div><div class="rstats"><div class="rs"><small>タイム</small><b id="rtime">0:00.0</b></div><div class="rs"><small>1問あたり</small><b id="per">0.0秒</b></div></div><p class="note" id="note"></p><div class="ra"><button class="btn light" id="close">答えを見る</button><button class="btn strong" id="again">もう1回</button></div></div></div><script>
-(()=>{'use strict';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],G=$('#grid'),T=$('#time'),L=$('#left'),B=$('#best'),BAR=$('#bar'),PT=$('#pt'),P=$('#prog'),M=$('#modal'),C=$('#fx'),X=C.getContext('2d');let mode='add',top=[],side=[],ins=[],start=null,elapsed=0,timer=null,graded=false,prev=0,parts=[],raf=null;const sh=a=>{a=[...a];for(let i=a.length-1;i;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a},fmt=ms=>{let s=Math.max(0,ms)/1000,m=Math.floor(s/60),q=String(Math.floor(s%60)).padStart(2,'0');return`${m}:${q}.${Math.floor(s*10)%10}`},ans=(r,c)=>mode==='add'?side[r]+top[c]:side[r]*top[c];function toast(s){let e=$('#toast');e.textContent=s;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),850)}function best(){let v=+localStorage.getItem('m100_'+mode);B.textContent=v?fmt(v):'—'}function stop(){clearInterval(timer);timer=null;if(start!==null)elapsed=performance.now()-start;T.textContent=fmt(elapsed)}function resetTime(){clearInterval(timer);timer=null;start=null;elapsed=0;T.textContent='0:00.0'}function go(){if(start!==null||graded)return;start=performance.now();timer=setInterval(()=>{elapsed=performance.now()-start;T.textContent=fmt(elapsed)},80);toast('スタート！')}function cell(cls,t=''){let d=document.createElement('div');d.className='c '+cls;if(t!=='')d.textContent=t;return d}function unhi(){$$('.focus,.axis').forEach(e=>e.classList.remove('focus','axis'))}function hi(r,c,w){unhi();w.classList.add('focus');$(`.th[data-c="${c}"]`)?.classList.add('axis');$(`.sh[data-r="${r}"]`)?.classList.add('axis');$$(`.ans[data-r="${r}"],.ans[data-c="${c}"]`).forEach(e=>e.classList.add('axis'))}function render(){G.innerHTML='';ins=[];G.append(cell('corner',mode==='add'?'＋':'×'));top.forEach((n,c)=>{let h=cell('head th',n);h.dataset.c=c;G.append(h)});for(let r=0;r<10;r++){let h=cell('head sh',side[r]);h.dataset.r=r;G.append(h);for(let c=0;c<10;c++){let w=cell('ans');w.dataset.r=r;w.dataset.c=c;let i=document.createElement('input');i.type='text';i.inputMode='numeric';i.maxLength=2;i.autocomplete='off';i.dataset.i=r*10+c;i.setAttribute('aria-label',`${side[r]} ${mode==='add'?'たす':'かける'} ${top[c]} の答え`);let cor=document.createElement('span');cor.className='corr';cor.textContent='→ '+ans(r,c);i.onfocus=()=>hi(r,c,w);i.onblur=unhi;i.oninput=e=>{if(graded)return;go();i.value=i.value.replace(/\D/g,'').slice(0,2);progress();if(i.value.length>1)move(+i.dataset.i,1)};i.onkeydown=e=>{let n=+i.dataset.i,d=e.key==='ArrowDown'?10:e.key==='ArrowUp'?-10:(e.key==='Enter'||e.key==='ArrowRight')?1:e.key==='ArrowLeft'?-1:0;if(e.key==='Backspace'&&!i.value)d=-1;if(d){e.preventDefault();move(n,d)}};w.append(i,cor);G.append(w);ins.push(i)}}progress()}function move(n,d){let t=ins[n+d];if(t&&!t.disabled){t.focus();t.select()}}function spark(){let r=P.getBoundingClientRect(),x=r.left+r.width*.8,y=r.top+r.height/2;for(let i=0;i<6;i++){let s=document.createElement('span'),a=Math.PI*2*i/6,dd=25+Math.random()*20;s.className='spark';s.textContent=i%2?'✦':'•';s.style.left=x+'px';s.style.top=y+'px';s.style.color=i%2?'#278565':'#4e86c8';s.style.setProperty('--x',Math.cos(a)*dd+'px');s.style.setProperty('--y',Math.sin(a)*dd+'px');document.body.append(s);setTimeout(()=>s.remove(),650)}}function progress(){let n=ins.filter(i=>i.value).length;L.textContent=100-n;PT.textContent=n+' / 100';BAR.style.width=n+'%';if(n>prev&&n%10===0){P.classList.remove('pop');void P.offsetWidth;P.classList.add('pop');spark()}prev=n;if(n===100&&!graded)setTimeout(()=>{if(!graded&&ins.every(i=>i.value))grade()},180)}function grade(){graded=true;stop();unhi();let s=0;ins.forEach((i,k)=>{let r=Math.floor(k/10),c=k%10,ok=+i.value===ans(r,c);i.parentElement.classList.add(ok?'ok':'ng');i.disabled=true;if(ok)s++});if(s===100){let key='m100_'+mode,old=+localStorage.getItem(key);if(!old||elapsed<old)localStorage.setItem(key,elapsed);best()}result(s)}function result(s){$('#score').textContent=s;$('#rtime').textContent=fmt(elapsed);$('#per').textContent=(elapsed/100000).toFixed(1)+'秒';let a=s===100?['🏆','PERFECT!','100マス 全問正解','100点！すごい集中力です。タイムも記録しました。',1]:s>=90?['🎉','すごい！','100マスコンプリート','赤いマスに正しい答えが出ています。確認してみよう。',.6]:s>=70?['✨','できた！','100マスコンプリート','最後までやり切りました。間違いの正答を確認できます。',.35]:['💪','完走！','100マスコンプリート','最後まで入力できました。赤いマスで正答を確認しよう。',.18];$('#icon').textContent=a[0];$('#rt').textContent=a[1];$('#rsub').textContent=a[2];$('#note').textContent=a[3];celebrate(a[4]);if(s===100)sound();M.classList.add('show')}function clearAns(f=true){graded=false;M.classList.remove('show');stopFx();resetTime();prev=0;ins.forEach(i=>{i.disabled=false;i.value='';i.parentElement.classList.remove('ok','ng','focus','axis')});progress();if(f)setTimeout(()=>ins[0]?.focus(),30)}function fresh(){M.classList.remove('show');stopFx();resetTime();graded=false;prev=0;top=sh([0,1,2,3,4,5,6,7,8,9]);side=sh([0,1,2,3,4,5,6,7,8,9]);render();toast('新しい問題！')}$$('.mode').forEach(b=>b.onclick=()=>{if(mode===b.dataset.m)return;mode=b.dataset.m;$$('.mode').forEach(x=>x.classList.toggle('on',x===b));best();fresh()});$('#clear').onclick=()=>clearAns();$('#new').onclick=fresh;$('#close').onclick=()=>{M.classList.remove('show');stopFx()};$('#again').onclick=fresh;M.onclick=e=>{if(e.target===M){M.classList.remove('show');stopFx()}};function size(){let d=Math.min(devicePixelRatio||1,2);C.width=innerWidth*d;C.height=innerHeight*d;C.style.width=innerWidth+'px';C.style.height=innerHeight+'px';X.setTransform(d,0,0,d,0,0)}addEventListener('resize',size);size();function celebrate(n){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;stopFx();let col=['#278565','#6bc2a3','#4e86c8','#f2b544','#ef786c','#8870c5'],N=Math.round(45+105*n),born=performance.now();parts=Array.from({length:N},()=>({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.3,vx:(Math.random()-.5)*2.2,vy:2.4+Math.random()*4.3,g:.04+Math.random()*.05,z:5+Math.random()*7,r:Math.random()*6,vr:(Math.random()-.5)*.18,c:col[Math.floor(Math.random()*col.length)],life:1}));function f(now){X.clearRect(0,0,innerWidth,innerHeight);parts.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(now-born>1700)p.life-=.017;X.save();X.globalAlpha=Math.max(0,p.life);X.translate(p.x,p.y);X.rotate(p.r);X.fillStyle=p.c;X.fillRect(-p.z/2,-p.z/3,p.z,p.z*.6);X.restore()});parts=parts.filter(p=>p.y<innerHeight+30&&p.life>0);if(parts.length&&now-born<4000)raf=requestAnimationFrame(f);else stopFx()}raf=requestAnimationFrame(f)}function stopFx(){cancelAnimationFrame(raf);raf=null;parts=[];X.clearRect(0,0,innerWidth,innerHeight)}function sound(){try{let A=window.AudioContext||webkitAudioContext,a=new A;[523,659,784,1047].forEach((f,i)=>{let o=a.createOscillator(),g=a.createGain();o.frequency.value=f;g.gain.setValueAtTime(.001,a.currentTime+i*.11);g.gain.linearRampToValueAtTime(.11,a.currentTime+i*.11+.02);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+i*.11+.25);o.connect(g);g.connect(a.destination);o.start(a.currentTime+i*.11);o.stop(a.currentTime+i*.11+.28)});setTimeout(()=>a.close(),1000)}catch(e){}}best();fresh()})();
-</script></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>100マス CHALLENGE</title>
+<style>
+:root{
+  --void:#000;
+  --white:#fff;
+  --ash:#9a9a9a;
+  --silver:#bdbdbd;
+  --iris:#8052ff;
+  --amber:#ffb829;
+  --teal:#24b99a;
+  --pink:#ff4fa0;
+  --blue:#4f8cff;
+  --red:#ff625a;
+  --cell:64px;
+  --gap:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:var(--void);color:var(--white)}
+body{font-family:Inter,"Noto Sans JP","Yu Gothic UI","Yu Gothic",system-ui,sans-serif;overflow:hidden}
+button,input{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
+#ambient,#finishFx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#ambient{z-index:0;opacity:.9}
+#finishFx{z-index:80}
+.app{position:relative;z-index:2;width:100vw;height:100svh;display:grid;grid-template-columns:minmax(290px,30vw) 1fr;overflow:hidden}
+.sidebar{position:relative;display:flex;flex-direction:column;min-width:0;padding:clamp(24px,3vw,48px);padding-right:24px}
+.brandline{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);font-weight:600}
+.mark{width:14px;height:14px;display:inline-block;clip-path:polygon(50% 0,100% 100%,0 100%);background:linear-gradient(135deg,var(--iris),var(--teal));transform:rotate(26deg)}
+.kicker{margin-top:clamp(44px,7vh,76px);color:var(--amber);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+h1{margin:10px 0 0;font-size:clamp(56px,6.3vw,104px);line-height:.83;font-weight:400;letter-spacing:-.065em;white-space:nowrap}
+h1 .small{display:block;font-size:.54em;letter-spacing:-.04em;margin-top:12px}
+.lead{max-width:330px;margin:24px 0 0;color:var(--silver);font-size:clamp(13px,1.1vw,17px);line-height:1.6;font-weight:300}
+.mode-wrap{margin-top:28px;display:flex;gap:8px;align-items:center}
+.mode{appearance:none;border:1px solid #292929;background:transparent;color:var(--ash);padding:11px 17px;border-radius:999px;cursor:pointer;font-size:13px;transition:.18s ease;min-width:104px}
+.mode:hover{border-color:#545454;color:white}.mode.on{border-color:var(--iris);background:var(--iris);color:white}
+.status{margin-top:auto;padding-top:28px;display:grid;grid-template-columns:auto 1fr;align-items:end;gap:18px}
+.leftnum{font-size:clamp(62px,7vw,112px);font-weight:200;line-height:.72;letter-spacing:-.06em}
+.leftmeta{padding-bottom:3px}.leftmeta b{display:block;color:var(--white);font-weight:500;font-size:13px;letter-spacing:.07em}.leftmeta span{display:block;margin-top:6px;color:var(--ash);font-size:11px;line-height:1.5}
+.progress{height:2px;background:#1f1f1f;margin-top:18px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:var(--iris);transition:width .2s ease}
+.bottom-actions{display:flex;gap:14px;align-items:center;margin-top:18px}.ghost{appearance:none;border:0;background:none;color:var(--ash);padding:6px 0;cursor:pointer;font-size:12px;text-decoration:none}.ghost:hover{color:white}.dot{width:3px;height:3px;background:#535353;border-radius:50%}
+.stage{position:relative;display:grid;place-items:center;min-width:0;min-height:0;padding:22px 26px 22px 6px}
+.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(128,82,255,.08),transparent 43%);pointer-events:none}
+.grid-wrap{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.grid{display:grid;grid-template-columns:repeat(11,var(--cell));grid-auto-rows:var(--cell);gap:var(--gap);width:max-content;height:max-content;user-select:none}
+.cell{position:relative;display:grid;place-items:center;min-width:0;border-radius:7px;overflow:visible}
+.head{background:#0c0c0c;color:#d8d8d8;font-size:clamp(15px,1.3vw,22px);font-weight:400;transition:.16s ease}
+.head.axis{color:white;background:#151515;box-shadow:inset 0 -2px 0 var(--amber)}
+.corner{background:var(--iris);color:white;font-size:clamp(20px,1.6vw,28px);font-weight:400}
+.answer{background:#070707;outline:1px solid #202020;outline-offset:-1px;transition:transform .14s ease,background .14s ease,outline-color .14s ease,box-shadow .14s ease}
+.answer.rowcol{background:#0d0d0d}.answer.focus{z-index:4;background:#111;outline-color:var(--iris);box-shadow:0 0 0 2px var(--iris),0 0 28px rgba(128,82,255,.34);transform:scale(1.035)}
+.answer.confirmed{animation:cellPulse .34s ease-out}@keyframes cellPulse{0%{transform:scale(1.035)}35%{transform:scale(1.12);background:#171020}100%{transform:scale(1.035)}}
+.answer.ok{outline-color:rgba(36,185,154,.65);background:rgba(10,54,44,.42)}
+.answer.ng{outline-color:rgba(255,98,90,.78);background:rgba(70,19,16,.52)}
+.answer.ng input{color:#ff8c85;transform:translateY(-7px);text-decoration:line-through;text-decoration-thickness:1px}
+input{width:100%;height:100%;border:0;outline:0;background:transparent;color:white;text-align:center;padding:0;border-radius:7px;font-size:clamp(15px,1.35vw,23px);font-weight:500;caret-color:var(--iris)}
+input:disabled{opacity:1;-webkit-text-fill-color:currentColor}
+.correct{display:none;position:absolute;left:50%;bottom:4px;transform:translateX(-50%);color:var(--amber);font-size:clamp(8px,.7vw,11px);font-weight:600;white-space:nowrap;line-height:1}.ng .correct{display:block}
+.enter-hint{position:fixed;z-index:8;right:26px;bottom:16px;color:#676767;font-size:10px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}.enter-hint b{color:#a8a8a8;font-weight:500}
+.burst-ring{position:fixed;z-index:60;width:20px;height:20px;border:1px solid var(--iris);border-radius:50%;pointer-events:none;animation:ring .55s ease-out forwards}@keyframes ring{to{width:84px;height:84px;margin-left:-32px;margin-top:-32px;opacity:0;border-color:var(--amber)}}
+.burst-piece{position:fixed;z-index:61;width:9px;height:9px;clip-path:polygon(50% 0,100% 100%,0 100%);pointer-events:none;animation:burst .62s cubic-bezier(.12,.62,.2,1) forwards;filter:drop-shadow(0 0 4px currentColor)}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%) rotate(var(--r0)) scale(.35)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--r1)) scale(1.05)}}
+.toast{position:fixed;z-index:70;top:20px;left:50%;transform:translate(-50%,-12px);opacity:0;color:#fff;background:#111;border:1px solid #272727;border-radius:999px;padding:9px 14px;font-size:11px;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+.complete-ready{position:fixed;z-index:20;right:28px;bottom:28px;display:none;align-items:center;gap:10px;border:0;background:var(--iris);color:white;border-radius:999px;padding:13px 18px;cursor:pointer;font-size:13px;box-shadow:0 0 0 1px rgba(255,255,255,.12)}.complete-ready.show{display:flex;animation:readyIn .25s ease-out}@keyframes readyIn{from{opacity:0;transform:translateY(8px)}}
+.result-screen{position:fixed;inset:0;z-index:75;display:none;background:#000;overflow:hidden}.result-screen.show{display:block}.result-inner{position:relative;z-index:3;width:100%;height:100%;padding:clamp(28px,5vw,78px);display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}.r-label{color:var(--amber);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}.r-score{margin-top:18px;font-size:clamp(110px,18vw,280px);line-height:.72;font-weight:200;letter-spacing:-.075em}.r-score small{font-size:.19em;color:#858585;letter-spacing:-.02em;margin-left:8px}.r-title{margin-top:32px;font-size:clamp(34px,4.3vw,70px);line-height:.95;font-weight:400;letter-spacing:-.05em}.r-sub{margin-top:16px;max-width:530px;color:var(--silver);font-size:clamp(14px,1.3vw,19px);font-weight:300;line-height:1.55}.timebox{align-self:center}.timebox .cap{color:var(--ash);font-size:11px;letter-spacing:.16em;text-transform:uppercase}.time{margin-top:12px;font-size:clamp(76px,9.2vw,150px);line-height:.8;font-weight:200;letter-spacing:-.065em}.time small{display:block;margin-top:22px;font-size:14px;line-height:1.5;letter-spacing:0;color:var(--ash);font-weight:300}.r-actions{display:flex;gap:16px;align-items:center;margin-top:42px}.primary{appearance:none;border:0;background:var(--iris);color:white;border-radius:999px;padding:13px 19px;cursor:pointer;font-size:13px}.result-ghost{appearance:none;border:0;background:none;color:#aaa;cursor:pointer;padding:10px 0;font-size:13px}.result-ghost:hover{color:white}
+@media(max-width:900px){body{overflow:auto}.app{height:auto;min-height:100svh;display:block;overflow:visible}.sidebar{min-height:auto;padding:24px 20px 12px}.kicker{margin-top:26px}h1{font-size:58px}.lead{display:none}.mode-wrap{margin-top:18px}.status{position:absolute;right:20px;bottom:22px;display:flex;align-items:flex-end}.leftnum{font-size:54px}.leftmeta span{display:none}.progress{display:none}.bottom-actions{margin-top:18px}.stage{height:auto;padding:8px 6px 24px;overflow:auto;place-items:start center}.grid-wrap{min-width:max-content}.enter-hint{display:none}.result-inner{grid-template-columns:1fr;align-content:center}.timebox{align-self:auto}.r-score{font-size:34vw}.time{font-size:20vw}}
+@media(max-width:560px){.sidebar{padding:16px 12px 8px}.brandline{font-size:9px}.kicker{margin-top:18px}h1{font-size:44px}.mode{padding:9px 12px;min-width:0}.status{right:12px;bottom:16px}.leftnum{font-size:44px}.leftmeta b{font-size:10px}.stage{padding-top:4px}.grid{gap:1px}.cell{border-radius:4px}.result-inner{padding:26px 20px}.r-actions{flex-direction:column;align-items:flex-start;gap:5px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.answer,.mode,.progress>i{transition:none}.burst-piece,.burst-ring{display:none}}
+</style>
+</head>
+<body>
+<canvas id="ambient"></canvas>
+<canvas id="finishFx"></canvas>
+<div class="toast" id="toast">START</div>
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="brandline"><span class="mark"></span><span>100 QUESTIONS / MATH</span></div>
+    <div class="kicker">FOCUS ON ONE SQUARE AT A TIME.</div>
+    <h1>100<span class="small">マス CHALLENGE</span></h1>
+    <p class="lead">上と左の数字を見て、100マスを埋めよう。時間は見えません。最後まで集中したあとに、結果とタイムが出ます。</p>
+    <div class="mode-wrap" aria-label="計算の種類">
+      <button class="mode on" data-mode="add">＋ たし算</button>
+      <button class="mode" data-mode="mul">× かけ算</button>
+    </div>
+    <div class="status">
+      <div class="leftnum" id="remaining">100</div>
+      <div class="leftmeta"><b>LEFT</b><span id="progressText">0 / 100</span></div>
+    </div>
+    <div class="progress"><i id="progressBar"></i></div>
+    <div class="bottom-actions">
+      <button class="ghost" id="newBtn">新しい問題</button><span class="dot"></span>
+      <button class="ghost" id="clearBtn">答えを消す</button><span class="dot"></span>
+      <button class="ghost" id="fullscreenBtn">⛶ 全画面</button>
+    </div>
+  </aside>
+  <main class="stage">
+    <div class="grid-wrap"><div class="grid" id="grid" role="grid" aria-label="100マス計算"></div></div>
+  </main>
+</div>
+<div class="enter-hint"><b>ENTER</b> で次のマスへ</div>
+<button class="complete-ready" id="gradeBtn">答え合わせ <span>↗</span></button>
+<section class="result-screen" id="resultScreen" aria-modal="true" role="dialog">
+  <div class="result-inner">
+    <div>
+      <div class="r-label" id="resultLabel">RESULT / COMPLETE</div>
+      <div class="r-score"><span id="score">100</span><small>/ 100</small></div>
+      <div class="r-title" id="resultTitle">Perfect.</div>
+      <div class="r-sub" id="resultSub">100マス、全問正解。集中して最後までやり切りました。</div>
+    </div>
+    <div class="timebox">
+      <div class="cap">YOUR TIME</div>
+      <div class="time" id="resultTime">0:00.0<small id="timeSub">1問あたり 0.0秒</small></div>
+      <div class="r-actions">
+        <button class="primary" id="againBtn">もう一度</button>
+        <button class="result-ghost" id="reviewBtn">答えを見る</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const grid=$('#grid'), remaining=$('#remaining'), progressText=$('#progressText'), progressBar=$('#progressBar');
+const resultScreen=$('#resultScreen'), gradeBtn=$('#gradeBtn'), ambient=$('#ambient'), finishFx=$('#finishFx');
+const actx=ambient.getContext('2d'), fctx=finishFx.getContext('2d');
+const colors=['#8052ff','#ffb829','#24b99a','#ff4fa0','#4f8cff','#ffffff'];
+let mode='add', topNums=[], sideNums=[], inputs=[], startTime=null, elapsed=0, graded=false, complete=false;
+let ambientParticles=[], finishParticles=[], finishRaf=null;
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const answer=(r,c)=>mode==='add'?sideNums[r]+topNums[c]:sideNums[r]*topNums[c];
+const formatTime=ms=>{const s=Math.max(0,ms)/1000,m=Math.floor(s/60),sec=Math.floor(s%60),t=Math.floor(s*10)%10;return `${m}:${String(sec).padStart(2,'0')}.${t}`};
+function toast(text){const t=$('#toast');t.textContent=text;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),800)}
+function startTimer(){if(startTime===null&&!graded)startTime=performance.now()}
+function stopTimer(){if(startTime!==null)elapsed=performance.now()-startTime}
+function resetTimer(){startTime=null;elapsed=0}
+function makeCell(cls,text=''){const d=document.createElement('div');d.className='cell '+cls;if(text!=='')d.textContent=text;return d}
+function clearHighlights(){$$('.axis,.rowcol,.focus').forEach(e=>e.classList.remove('axis','rowcol','focus'))}
+function highlight(r,c,wrap){clearHighlights();wrap.classList.add('focus');document.querySelector(`.top-head[data-c="${c}"]`)?.classList.add('axis');document.querySelector(`.side-head[data-r="${r}"]`)?.classList.add('axis');$$(`.answer[data-r="${r}"],.answer[data-c="${c}"]`).forEach(e=>e.classList.add('rowcol'));wrap.classList.add('focus')}
+function render(){
+  grid.innerHTML='';inputs=[];
+  grid.append(makeCell('corner',mode==='add'?'＋':'×'));
+  topNums.forEach((n,c)=>{const h=makeCell('head top-head',n);h.dataset.c=c;grid.append(h)});
+  for(let r=0;r<10;r++){
+    const h=makeCell('head side-head',sideNums[r]);h.dataset.r=r;grid.append(h);
+    for(let c=0;c<10;c++){
+      const wrap=makeCell('answer');wrap.dataset.r=r;wrap.dataset.c=c;
+      const input=document.createElement('input');input.type='text';input.inputMode='numeric';input.autocomplete='off';input.maxLength=2;input.enterKeyHint='next';input.dataset.index=r*10+c;
+      input.setAttribute('aria-label',`${sideNums[r]} ${mode==='add'?'たす':'かける'} ${topNums[c]} の答え`);
+      const correct=document.createElement('span');correct.className='correct';correct.textContent=`→ ${answer(r,c)}`;
+      input.addEventListener('focus',()=>highlight(r,c,wrap));input.addEventListener('blur',()=>clearHighlights());
+      input.addEventListener('input',()=>{if(graded)return;startTimer();input.value=input.value.replace(/\D/g,'').slice(0,2);updateProgress()});
+      input.addEventListener('keydown',e=>handleKey(e,input,wrap));
+      wrap.append(input,correct);grid.append(wrap);inputs.push(input);
+    }
+  }
+  updateProgress();fitGrid();
+}
+function handleKey(e,input,wrap){
+  if(graded)return;
+  const i=+input.dataset.index;
+  if(e.key==='Enter'){
+    e.preventDefault();
+    if(!input.value)return;
+    startTimer();burstAt(wrap);wrap.classList.remove('confirmed');void wrap.offsetWidth;wrap.classList.add('confirmed');
+    updateProgress();
+    if(inputs.every(x=>x.value)){setTimeout(grade,220);return}
+    move(i,1);return;
+  }
+  if(e.key==='ArrowRight'){e.preventDefault();move(i,1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();move(i,-1)}
+  else if(e.key==='ArrowDown'){e.preventDefault();move(i,10)}
+  else if(e.key==='ArrowUp'){e.preventDefault();move(i,-10)}
+  else if(e.key==='Backspace'&&!input.value){e.preventDefault();move(i,-1)}
+}
+function move(i,d){const next=inputs[i+d];if(next&&!next.disabled){next.focus();next.select()}}
+function updateProgress(){
+  const done=inputs.filter(i=>i.value).length;complete=done===100;
+  remaining.textContent=100-done;progressText.textContent=`${done} / 100`;progressBar.style.width=`${done}%`;
+  gradeBtn.classList.toggle('show',complete&&!graded);
+}
+function burstAt(wrap){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const r=wrap.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+  const ring=document.createElement('i');ring.className='burst-ring';ring.style.left=(x-10)+'px';ring.style.top=(y-10)+'px';document.body.append(ring);setTimeout(()=>ring.remove(),650);
+  for(let k=0;k<14;k++){
+    const p=document.createElement('i'),a=(Math.PI*2*k/14)+(Math.random()-.5)*.34,d=28+Math.random()*38;
+    p.className='burst-piece';p.style.left=x+'px';p.style.top=y+'px';p.style.color=colors[k%colors.length];p.style.background='currentColor';
+    p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',Math.sin(a)*d+'px');p.style.setProperty('--r0',(Math.random()*180)+'deg');p.style.setProperty('--r1',(240+Math.random()*420)+'deg');
+    document.body.append(p);setTimeout(()=>p.remove(),680);
+  }
+}
+function grade(){
+  if(graded||!inputs.every(i=>i.value))return;
+  graded=true;gradeBtn.classList.remove('show');stopTimer();clearHighlights();
+  let score=0;
+  inputs.forEach((input,k)=>{const r=Math.floor(k/10),c=k%10,ok=Number(input.value)===answer(r,c);input.disabled=true;input.parentElement.classList.add(ok?'ok':'ng');if(ok)score++});
+  if(score===100){const key='hundredmasu_best_'+mode,old=Number(localStorage.getItem(key));if(!old||elapsed<old)localStorage.setItem(key,String(elapsed))}
+  showResult(score);
+}
+function showResult(score){
+  $('#score').textContent=score;$('#resultTime').childNodes[0].nodeValue=formatTime(elapsed);$('#timeSub').textContent=`1問あたり ${(elapsed/100000).toFixed(1)}秒`;
+  const perfect=score===100;
+  $('#resultLabel').textContent=perfect?'RESULT / PERFECT':'RESULT / COMPLETE';
+  $('#resultTitle').textContent=perfect?'Perfect.':score>=90?'Great finish.':score>=70?'Well done.':'Completed.';
+  $('#resultSub').textContent=perfect?'100マス、全問正解。集中して最後までやり切りました。':'最後まで完走。赤いマスには、あなたの答えと正しい答えが表示されます。';
+  resultScreen.classList.add('show');startFinishFx(perfect?1:.45);if(perfect)chime();
+}
+function fresh(){
+  resultScreen.classList.remove('show');stopFinishFx();graded=false;complete=false;resetTimer();topNums=shuffle([0,1,2,3,4,5,6,7,8,9]);sideNums=shuffle([0,1,2,3,4,5,6,7,8,9]);render();toast('NEW CHALLENGE');setTimeout(()=>inputs[0]?.focus(),100)
+}
+function clearAnswers(){
+  if(graded){fresh();return}
+  resetTimer();inputs.forEach(i=>{i.value='';i.disabled=false;i.parentElement.classList.remove('ok','ng','confirmed')});updateProgress();toast('RESET');inputs[0]?.focus()
+}
+$$('.mode').forEach(btn=>btn.addEventListener('click',()=>{if(mode===btn.dataset.mode)return;mode=btn.dataset.mode;$$('.mode').forEach(b=>b.classList.toggle('on',b===btn));fresh()}));
+$('#newBtn').addEventListener('click',fresh);$('#clearBtn').addEventListener('click',clearAnswers);gradeBtn.addEventListener('click',grade);$('#againBtn').addEventListener('click',fresh);$('#reviewBtn').addEventListener('click',()=>{resultScreen.classList.remove('show');stopFinishFx()});
+$('#fullscreenBtn').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){toast('全画面表示にできませんでした')}});
+function fitGrid(){
+  if(innerWidth<=900){const cell=Math.max(29,Math.min(55,(innerWidth-18-10)/11));document.documentElement.style.setProperty('--cell',cell+'px');return}
+  const stage=document.querySelector('.stage').getBoundingClientRect();const maxW=stage.width-48,maxH=stage.height-44;const gap=3;const cell=Math.floor(Math.min((maxW-gap*10)/11,(maxH-gap*10)/11,80));document.documentElement.style.setProperty('--cell',Math.max(42,cell)+'px')
+}
+addEventListener('resize',()=>{fitGrid();sizeCanvases()});
+function sizeCanvases(){const d=Math.min(devicePixelRatio||1,2);for(const [cv,ctx] of [[ambient,actx],[finishFx,fctx]]){cv.width=innerWidth*d;cv.height=innerHeight*d;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';ctx.setTransform(d,0,0,d,0,0)}}
+function setupAmbient(){
+  const n=Math.min(120,Math.max(55,Math.floor(innerWidth*innerHeight/13000)));
+  ambientParticles=Array.from({length:n},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:2+Math.random()*5,vx:(Math.random()-.5)*.08,vy:(Math.random()-.5)*.08,r:Math.random()*Math.PI*2,vr:(Math.random()-.5)*.002,c:colors[Math.floor(Math.random()*colors.length)],a:.08+Math.random()*.24}));
+}
+function drawAmbient(){
+  actx.clearRect(0,0,innerWidth,innerHeight);for(const p of ambientParticles){p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(p.x<-12)p.x=innerWidth+12;if(p.x>innerWidth+12)p.x=-12;if(p.y<-12)p.y=innerHeight+12;if(p.y>innerHeight+12)p.y=-12;actx.save();actx.globalAlpha=p.a;actx.strokeStyle=p.c;actx.lineWidth=.8;actx.translate(p.x,p.y);actx.rotate(p.r);actx.beginPath();actx.moveTo(0,-p.s);actx.lineTo(p.s,p.s);actx.lineTo(-p.s,p.s);actx.closePath();actx.stroke();actx.restore()}requestAnimationFrame(drawAmbient)
+}
+function startFinishFx(power){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;stopFinishFx();const n=Math.round(140*power+50);finishParticles=Array.from({length:n},()=>({x:Math.random()*innerWidth,y:innerHeight+20+Math.random()*160,vx:(Math.random()-.5)*4,vy:-(5+Math.random()*10),g:.045+Math.random()*.055,r:Math.random()*6,vr:(Math.random()-.5)*.12,s:3+Math.random()*8,c:colors[Math.floor(Math.random()*colors.length)],life:1}));const born=performance.now();function frame(now){fctx.clearRect(0,0,innerWidth,innerHeight);for(const p of finishParticles){p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(now-born>2600)p.life-=.009;fctx.save();fctx.globalAlpha=Math.max(0,p.life);fctx.strokeStyle=p.c;fctx.lineWidth=1.2;fctx.translate(p.x,p.y);fctx.rotate(p.r);fctx.beginPath();fctx.moveTo(0,-p.s);fctx.lineTo(p.s,p.s);fctx.lineTo(-p.s,p.s);fctx.closePath();fctx.stroke();fctx.restore()}finishParticles=finishParticles.filter(p=>p.life>0&&p.y<innerHeight+180);if(finishParticles.length&&now-born<5200)finishRaf=requestAnimationFrame(frame);else stopFinishFx()}finishRaf=requestAnimationFrame(frame)}
+function stopFinishFx(){cancelAnimationFrame(finishRaf);finishRaf=null;finishParticles=[];fctx.clearRect(0,0,innerWidth,innerHeight)}
+function chime(){try{const AC=window.AudioContext||window.webkitAudioContext,ac=new AC;[523.25,659.25,783.99,1046.5].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.001,ac.currentTime+i*.09);g.gain.linearRampToValueAtTime(.085,ac.currentTime+i*.09+.025);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+i*.09+.28);o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+i*.09);o.stop(ac.currentTime+i*.09+.3)});setTimeout(()=>ac.close(),900)}catch(e){}}
+sizeCanvases();setupAmbient();drawAmbient();fresh();
+})();
+</script>
+</body>
+</html>
